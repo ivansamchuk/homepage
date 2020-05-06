@@ -8,3 +8,5 @@ Created by Ivan Samchuk for (Binary studio academy), 2020.
 * Volodymyr Kushnir
 * binary-studio-academy repository
 * other guys whose parts of code I stole 😊
+
+Github.com
