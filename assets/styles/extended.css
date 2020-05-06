@@ -1,0 +1,28 @@
+main {
+  font-size: 14px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  box-sizing: border-box;
+  background-size: cover;
+  background-image: url(../images/bg_bugs.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+footer {
+  height: 30vh;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+footer {
+    height: auto;
+    position: relative;
+    padding: 1em;
+}
