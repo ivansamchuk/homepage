@@ -9,4 +9,4 @@ Created by Ivan Samchuk for (Binary studio academy), 2020.
 * binary-studio-academy repository
 * other guys whose parts of code I stole 😊
 
-Github.com
+powered by Github
