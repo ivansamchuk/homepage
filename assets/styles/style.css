@@ -1,0 +1,296 @@
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --color-text: rgba(0, 0, 0, 0.87);
+  --color-link: #0000FF; /* Blue */
+  --color-bg-page: #FFFFFF;
+  --color-divider: rgba(222, 222, 222, 1);
+  --spacing-base: 1rem;
+  --width-article: 1127px;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px; /* Base size as per your original design */
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-main);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: #f4f4f4; /* Fallback color */
+}
+
+/* =========================================
+   2. TYPOGRAPHY
+   ========================================= */
+h1, h2, h3, h4, h5 {
+  margin: 0 0 1rem 0;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+h1 { font-size: 2rem; font-weight: 900; text-transform: uppercase; }
+h2 { font-size: 1.75rem; font-weight: 900; letter-spacing: 0.1em; }
+h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+
+p { margin: 0 0 1em; }
+a { color: var(--color-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+ul { list-style: none; padding-left: 0; margin: 0; }
+
+/* Custom Lists with Dots */
+ul.bulleted li, 
+.timeline > li ul li {
+  position: relative;
+  padding-left: 1.5em;
+}
+
+ul.bulleted li::before,
+.timeline > li ul li::before {
+  content: "●";
+  position: absolute;
+  left: 0;
+  color: inherit;
+  font-size: 0.8em;
+  line-height: 1.6;
+}
+
+/* =========================================
+   3. LAYOUT & CONTAINER (Replaces Semantic UI Grid)
+   ========================================= */
+main {
+  flex: 1; /* Pushes footer down */
+  width: 100%;
+  /* background-image: url('../images/bg_bugs.jpg');
+  background-size: cover;
+  background-position: center; */
+  /* background: #f7f7f7;  */
+  background: linear-gradient(180deg, #f7f7f7 0%, #e8f5e8 100%);
+  background-image: none;
+  background-attachment: fixed; /* Keep parallax on desktop */
+  padding: 2rem 1rem;
+}
+
+@media (pointer: coarse) {
+  /* Disable fixed background on mobile for performance */
+  main { background-attachment: scroll; }
+}
+
+article {
+  max-width: var(--width-article);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page {
+  background: var(--color-bg-page);
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  position: relative;
+  border-radius: 4px;
+}
+
+/* Specific Border Styling from inline style logic */
+.page[style*="border-color"] {
+  padding: 4.5em;
+  border: none !important; /* Override inline styles if needed */
+}
+
+.page[style*="border-color"]::before {
+  content: "";
+  position: absolute;
+  inset: 2em; /* Top/Right/Bottom/Left shorthand */
+  border: 1em solid #409B69; /* Hardcoded from your inline style */
+  pointer-events: none;
+}
+
+/* Grid Emulation (Simplified) */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -1rem;
+}
+
+.grid > .row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column {
+  padding: 1rem;
+}
+
+/* Custom Widths based on your usage */
+.three.wide { width: 20%; } /* Approx 3/16 */
+.thirteen.wide { width: 80%; } /* Approx 13/16 */
+.sixteen.wide { width: 100%; }
+.ten.wide { width: 62.5%; }       /* 10/16 exactly */
+.six.wide { width: 37.5%; }       /* 6/16 exactly */
+
+.center.aligned { text-align: center; }
+
+/* Mobile Stackable */
+@media (max-width: 768px) {
+  .stackable.grid { flex-direction: column; }
+  .column { width: 100% !important; }
+  
+  .page[style*="border-color"] { padding: 1.5rem; }
+  .page[style*="border-color"]::before { display: none; }
+  
+  /* Mobile Order fix if needed, otherwise stack naturally */
+}
+
+/* =========================================
+   4. COMPONENTS
+   ========================================= */
+
+/* Avatar */
+
+/* OLD */
+.avatar-wrapper img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%; /* Робимо зображення круглим */
+  border: 4px solid #409B69; /* Чітка рамка, що відповідає кольору сторінки */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Легка тінь для глибини та "професійності" */
+  transition: all 0.3s ease-in-out; /* Додаємо плавність для потенційних hover-ефектів */
+}
+
+#avatar:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Divider */
+.divider {
+  border-top: 1px solid var(--color-divider);
+  margin: 1rem 0;
+}
+.fat.divider {
+  border-top: 5px solid #000;
+  width: 33%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Contacts */
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin-top: 0.5rem;
+}
+
+.contacts a {
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.contacts svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Hover Colors */
+.contacts a.facebook:hover { color: #3b5998; }
+.contacts a.github:hover { color: #333; }
+.contacts a.telegram:hover { color: #0088cc; }
+.contacts a.linkedin:hover { color: #0077b5; }
+
+/* Timeline */
+.timeline {
+  padding: 0;
+}
+
+.timeline > li {
+  margin-bottom: 2rem;
+}
+
+/* Tags */
+.tags.small { font-size: 0.9em; }
+.tag {
+  display: inline-block;
+  background: #eee;
+  padding: 0.2em 0.6em;
+  border-radius: 4px;
+  margin: 0 0.2em 0.2em 0;
+  font-weight: 600;
+  font-size: 0.85em;
+}
+
+/* =========================================
+   5. NATIVE DETAILS (Replaces Checkbox Hack)
+   ========================================= */
+details {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  list-style: none; /* Hide default triangle in some browsers */
+  display: flex;
+  align-items: center;
+}
+
+/* Custom Triangle */
+summary::before {
+  content: "►";
+  font-size: 0.8em;
+  margin-right: 0.5em;
+  transition: transform 0.2s;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details > ul {
+  margin-top: 1rem;
+  padding-left: 1rem;
+}
+
+/* =========================================
+   6. FOOTER
+   ========================================= */
+footer {
+  background: #f9f9f9;
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* =========================================
+   7. UTILITIES & BUGS
+   ========================================= */
+.nowrap { white-space: nowrap; }
+
+/* Positioning bugs absolutely relative to the container */
+/* Note: Ensure container has position: relative */
+img[alt^="bug"] {
+  opacity: 0.8;
+  pointer-events: none;
+}
